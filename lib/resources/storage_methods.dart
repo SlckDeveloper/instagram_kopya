@@ -3,27 +3,31 @@
 //sadece tek bir resim yüklemesi yapılabilir ve herkesin profil fotosu son yüklenen resim olur.
 //videoda https://youtu.be/mEPm9w5QlJM?t=6045 kontrol et (1:40:00)
 
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/services.dart';
 
-class StorageMethods{
-
+class StorageMethods {
   final FirebaseStorage _storage = FirebaseStorage.instance;
- final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   //Adding image to firebase storage
-Future<String> uploadImageToStorage(String childName, Uint8List file, bool isPost) async{
-print("---------------------------------------------_auth.currentUser!.uid:");
-  Reference ref = _storage.ref().child(childName).child(_auth.currentUser!.uid);
-print("---------------------------------------------ref: "+ ref.toString());
-  UploadTask uploadTask = ref.putData(file);
-print("---------------------------------------------uploadTask: "+ uploadTask.toString());
-  TaskSnapshot snap = await uploadTask;
-print("---------------------------------------------snap: "+ snap.toString());
-  String downloadURL = await snap.ref.getDownloadURL();
-print("---------------------------------------------downloadURL: "+ downloadURL);
-  return downloadURL;
-}
+  Future<String> uploadImageToStorage(
+      String childName, Uint8List file, bool isPost) async {
+    Reference ref =
+        _storage.ref().child(childName).child(_auth.currentUser!.uid);
+    UploadTask uploadTask = ref.putData(file);
+    TaskSnapshot snap = await uploadTask;
+    String downloadURL = await snap.ref.getDownloadURL();
+
+    return downloadURL;
+  }
+
+  //Getting image URL from firebase storage
+  Future<String> downloadProfilePicWithURL() async {
+
+   String downloadURL = await _storage.ref().child("profilePics").child(_auth.currentUser!.uid).getDownloadURL();
+print("----------------------------------------------------------------------------------"+downloadURL);
+    return downloadURL;
+  }
 }

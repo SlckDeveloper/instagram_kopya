@@ -61,7 +61,7 @@ class AuthMethods {
     String res = "Some error occurred";
     try {
       if (eMail.isNotEmpty || password.isNotEmpty) {
-   await _auth.signInWithEmailAndPassword(
+        await _auth.signInWithEmailAndPassword(
             email: eMail, password: password);
 
         res = "success";
