@@ -17,4 +17,4 @@ samples, guidance on mobile development, and a full API reference.
 * 
 * flutter_svg paketi eklendi
 * image_picker: ^0.8.7+1 paketi, resim kütüphanesinden, internetten ve kameradan fotoğraf yüklemek için projeye eklendi
-* kaldığım yer 1:48:00
+* kaldığım yer 2:04:00  https://youtu.be/mEPm9w5QlJM
