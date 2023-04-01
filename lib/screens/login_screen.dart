@@ -1,8 +1,12 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:instagram_clone2/resources/auth_methods.dart';
 import 'package:instagram_clone2/utils/colors.dart';
+import 'package:instagram_clone2/utils/utils.dart';
 import 'package:instagram_clone2/widgets/text_field_input.dart';
+
+import 'home_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -14,6 +18,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  bool isLoading = false;
 
 
   @override
@@ -21,6 +26,23 @@ class _LoginScreenState extends State<LoginScreen> {
     super.dispose();
     _emailController.dispose();
     _passwordController.dispose();
+  }
+
+  void loginUser() async{
+    setState(() {
+      isLoading = true;
+    });
+    String res = await AuthMethods().loginUser(eMail: _emailController.text, password: _passwordController.text);
+    if (res == "success") {
+      if (!mounted) return;
+      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const HomeScreen()));
+    } else {
+      if (!mounted) return; //-----signup_screen.dart----->2
+      showSnackBar(res, context);
+    }
+    setState(() {
+      isLoading = false;
+    });
   }
 
   @override
@@ -69,7 +91,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
             ///button for login
             InkWell(
-              child: Container(
+              onTap: loginUser,
+              child: isLoading ? const CircularProgressIndicator(color: primaryColor,) : Container(
                 width: double.infinity,
                 alignment: Alignment.center,
                 padding: const EdgeInsets.symmetric(vertical: 12),

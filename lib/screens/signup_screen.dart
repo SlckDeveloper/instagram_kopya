@@ -76,7 +76,7 @@ class _SignupScreenState extends State<SignupScreen> {
           child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 32),
         width: double.infinity,
-        child: ListView(
+        child: ListView(  //-----4-----
           shrinkWrap: true,
           children: [
             Flexible(
@@ -171,7 +171,7 @@ class _SignupScreenState extends State<SignupScreen> {
               onTap: signUpUser,
               child: isLoading
                   ? const Center(
-                      child: CircularProgressIndicator(),
+                      child: CircularProgressIndicator(color: primaryColor,),
                     )
                   : Container(
                       width: double.infinity,
@@ -231,3 +231,5 @@ class _SignupScreenState extends State<SignupScreen> {
 ///Widgetlar bir katman şeklinde birbirlerinin üzerinde konumlandırılabilirler
 ///Widget, birden fazla çocuğu alır ve bunları aşağıdan yukarıya doğru sıralar. Yani ilk öğe en alttaki ve sonuncu öğe en üstteki öğedir.
 ///Positioned widget'ı ile CircleAvatar widget'ının üzereine bir katman şeklinde IconButton eklenmiştir.
+
+/// -4- ListView widget'ı render konusunda uyarı veriyor, listViewBuilder konusuna bakarak başka bir yöntem denenebilir
