@@ -9,20 +9,22 @@ pickImage(ImageSource source) async{
   XFile? file = await imagePicker.pickImage(source: source);
 
   if(file != null) {
-    return await file.readAsBytes();
+    return await file.readAsBytes(); //-----1-----
   }
 }
 
-showSnackBar(String content, BuildContext context){
+showSnackBar(String content, BuildContext context){ //-----2-----
   ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(content)));
 }
 
 
 
-///_file.readAsBytes(); metodu seçilen dosyayı Future<Uint8List> tipinde geriye döndürür. O yüzden dosya tipimizi auth_methods.dart dosyamızda
+/// -1- ///_file.readAsBytes(); metodu seçilen dosyayı Future<Uint8List> tipinde geriye döndürür. O yüzden dosya tipimizi auth_methods.dart dosyamızda
 ///"required Uint8List file" şekinde tanımladık.
 
-///String değeri Uint8List tipine çeviren fonksiyon:
+/// -2- ///Kullanıcıya hatalı işlemler için ekranda uyarı yazıları çıkarmak için bir SnackBar widget'ı barındıran showSnackBar fonksiyonu oluşturuldu.
+
+///String değeri Uint8List tipine çeviren fonksiyon: (bunun yerine, indirdiğimiz image_picker paketini kullandık)
 /*
 final String defaultProfileImageURL = "https://i.pinimg.com/474x/72/c4/3c/72c43c0e10161d3f741681380cfa2986.jpg";
 :::::::::::::::::::::::::::::::::::::::::::::String değeri Uint8List tipine çeviren fonksiyon::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -32,5 +34,3 @@ Uint8List convertStringToUint8List(String str) {
 
   return uint8list;
 }*/
-
-///Kullanıcıya hatalı işlemler için ekranda uyarı yazıları çıkarmak için bir SnackBar widget'ı barındıran showSnackBar fonksiyonu oluşturuldu.
