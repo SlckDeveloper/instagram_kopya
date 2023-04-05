@@ -1,8 +1,10 @@
 import 'dart:typed_data';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:instagram_clone2/models/user.dart' as model;
 import 'package:instagram_clone2/resources/auth_methods.dart';
 import 'package:instagram_clone2/responsive/mobile_screen_Layout.dart';
 import 'package:instagram_clone2/responsive/web_screen_layout.dart';
@@ -66,14 +68,15 @@ class _SignupScreenState extends State<SignupScreen> {
     });
     if (res != "success") {
       if (!mounted) return; //-----2-----
-      showSnackBar(res, context);
+      showSnackBar(context, res);
     } else {
       if (!mounted) return; //-----2-----
-      showSnackBar("Successfully registered", context);
+      showSnackBar(context, "Successfully registered");
+      model.User user =  await AuthMethods().getUserDetails();
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => const ResponsiveLayout(
-                  mobileScreenLayout: MobileScreenLayout(),
-                  webScreenLayout: WebScreenLayout()) ));
+        MaterialPageRoute(builder: (context) => ResponsiveLayout(
+                  mobileScreenLayout: MobileScreenLayout(user: user,),
+                  webScreenLayout: const WebScreenLayout()) ));
     }
   }
 

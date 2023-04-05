@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:instagram_clone2/models/user.dart' as model;
 import 'package:instagram_clone2/resources/auth_methods.dart';
 import 'package:instagram_clone2/responsive/mobile_screen_Layout.dart';
 import 'package:instagram_clone2/responsive/responsive_layout_screen.dart';
@@ -10,6 +12,7 @@ import 'package:instagram_clone2/utils/utils.dart';
 import 'package:instagram_clone2/widgets/text_field_input.dart';
 
 
+//import '../models/user.dart';
 import 'home_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -39,13 +42,14 @@ class _LoginScreenState extends State<LoginScreen> {
         eMail: _emailController.text, password: _passwordController.text);
     if (res == "success") {
       if (!mounted) return;
+      model.User currentUser =  await AuthMethods().getUserDetails();
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => const ResponsiveLayout(
-                  mobileScreenLayout: MobileScreenLayout(),
+        MaterialPageRoute(builder: (context) =>  ResponsiveLayout(
+                  mobileScreenLayout: MobileScreenLayout(user: currentUser),
                   webScreenLayout: WebScreenLayout()) ));
     } else {
       if (!mounted) return; //-----signup_screen.dart----->2
-      showSnackBar(res, context);
+      showSnackBar(context, res);
     }
     setState(() {
       isLoading = false;

@@ -1,13 +1,16 @@
-//import 'package:instagram_clone2/models/user.dart' as model;
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:instagram_clone2/models/user.dart' as model;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram_clone2/utils/colors.dart';
 import 'package:instagram_clone2/utils/global_veriables.dart';
+
 //import 'package:instagram_clone2/providers/user_provider.dart';
 //import 'package:provider/provider.dart';
 
 class MobileScreenLayout extends StatefulWidget {
-  const MobileScreenLayout({Key? key}) : super(key: key);
+  model.User user;
+  MobileScreenLayout({Key? key, required this.user}) : super(key: key);
 
   @override
   State<MobileScreenLayout> createState() => _MobileScreenLayoutState();
@@ -43,13 +46,14 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
   @override
   Widget build(BuildContext context) {
     // model.User user = Provider.of<UserProvider>(context).getUser;
-
+    print("----------------------------------------------------------------------------------mobile_Sreen_layout--Built çalıştı");
+print("-------------------------------------------------------------------------------------------"+ widget.user.toString());
     return Scaffold(
       body: PageView(
-        children: homeScreenItems,
-        physics: NeverScrollableScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(),
         controller: pageController,
         onPageChanged: onPageChanged,
+        children: homeScreenItems,
       ),
       bottomNavigationBar: CupertinoTabBar(
         backgroundColor: mobileBackgroundColor,

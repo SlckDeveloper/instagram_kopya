@@ -13,7 +13,7 @@ pickImage(ImageSource source) async{
   }
 }
 
-showSnackBar(String content, BuildContext context){ //-----2-----
+showSnackBar(BuildContext context, String content, ){ //-----2-----
   ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(content)));
 }
 
