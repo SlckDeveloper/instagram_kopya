@@ -73,6 +73,12 @@ Future<model.User> getUserDetails() async{
     }
     return res;
   }
+
+  //SIGN OUT
+  Future<void> signOut() async{
+  await _auth.signOut();
+  }
+
 }
 
 ///createUserWithEmailAndPassword() metodu ile kullanıcının sadece email ve password bilgilerini kullanarak kayıt işlemi yapıyoruz --> FirebaseAuth

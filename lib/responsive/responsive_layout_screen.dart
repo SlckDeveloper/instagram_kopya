@@ -32,7 +32,7 @@ class _ResponsiveLayoutState extends State<ResponsiveLayout> {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constrains) {
-      if (constrains.maxWidth > webSreensize) {
+      if (constrains.maxWidth > webScreenSize) {
         /// Web screen
         return widget.webScreenLayout;
       }
